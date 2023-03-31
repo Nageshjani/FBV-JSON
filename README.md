@@ -55,12 +55,22 @@ from django.http import JsonResponse
 import json
 from django.http import JsonResponse
 from .models import Book
+from django.core import serializers
+
 
 def books(request):
     queries = Book.objects.all()
     book_list = list(queries.values())
     return JsonResponse({'books': book_list}, safe=False)
 
+
+
+# def books(request):
+#     books = Book.objects.all()
+#     book_data = serializers.serialize('json', books)
+#     book_list = json.loads(book_data)
+#     books_dict_list = [  book['fields'] for book in book_list]
+#     return JsonResponse({'books': books_dict_list}, safe=False)
 
 
 
